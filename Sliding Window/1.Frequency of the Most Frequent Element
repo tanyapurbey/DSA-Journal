@@ -1,0 +1,48 @@
+Leetcode 1838
+Frequency of the Most Frequent Element
+Medium
+
+The frequency of an element is the number of times it occurs in an array.
+You are given an integer array nums and an integer k. In one operation, you can choose an index of nums and increment the element at that index by 1.
+Return the maximum possible frequency of an element after performing at most k operations.
+
+Example 1:
+Input: nums = [1,2,4], k = 5
+Output: 3
+Explanation: Increment the first element three times and the second element two times to make nums = [4,4,4].
+4 has a frequency of 3.
+
+Constraints:
+1 <= nums.length <= 105
+1 <= nums[i] <= 105
+1 <= k <= 105
+
+Approach 1 
+Core Idea - SORTING AND SLIDING WINDOW
+1. why sorting ?? in array [2,4,1] only incrementation then 1 and 2 can be converted into 4 so larger element at the end will be good.
+2. maintain a window
+3. expand the window till condition ( current element * wind leng < wind sum + k)
+4. why this condition in the array [1,2,4] if current element is 2 and [2,2,4] can be beared if windsum + k is greater.
+5. max length of the wind at the end will be the frequency
+
+
+class Solution {
+    public int maxFrequency(int[] nums, int k) {
+        Arrays.sort(nums);
+        int start = 0;
+        int max = 0;
+        long windSum = 0;
+        for(int end = 0 ; end < nums.length ; end++){
+            windSum += nums[end];
+            while((long)nums[end] * (end - start + 1) > windSum + k){
+                windSum -= nums[start];
+                start++ ;
+            }
+            max = Math.max(max , end - start + 1);
+        }
+        return max;
+    }
+}
+
+Point to see :
+why long ?? because nums[end] * (end - start + 1) can be 10^5 and windsum can reach upto 10^5.
