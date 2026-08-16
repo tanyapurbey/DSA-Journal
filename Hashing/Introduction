@@ -1,0 +1,54 @@
+Introduction 
+
+1. Hashing converts key into hash code or value using hash function.
+2. In searching , it takes O(N) time while using hashing only O(1).
+
+For Example : COUNT THE FREQUENCY OF ELEMENT IN AN ARRAY 
+
+Approach 1 - Brute - O(N^2)
+Check the left side of the elemnts to check that it is counted before or not . If it is counted then skip the counting part or not then count the frequency.
+        for(int i = 0 ; i < nums.length ; i++){
+            boolean seen = false ;
+            for(int j = 0 ; j < i ; j++){
+                if(nums[i] == nums[j]){
+                    seen = true ;
+                    break ;
+                }
+            }
+            if(seen){
+                continue;
+            }
+            int count = 0;
+            for(int k = 0 ; k < nums.length ; k++){
+                if(nums[i] == nums[k]){
+                    count++ ;
+                }
+            }
+            System.out.println(nums[i] + "->" + count);
+        }
+
+
+Approach 2 - Better - O(NlogN)
+        Arrays.sort(nums);
+        int count = 1;
+        for(int i = 1 ; i < nums.length; i++){
+            if(nums[i] == nums[i-1]){
+                count++ ;
+            }
+            else{
+                System.out.println(nums[i-1] + "->" + count);
+                count = 1 ;
+            }
+
+        }
+       System.out.println(nums[nums.length-1] + "->"+count);
+
+
+Approach 3 - Optimal - HASHMAP
+        HashMap<Integer,Integer> m = new HashMap<>();
+        for(int num : nums){
+                m.put(num,m.getOrDefault(num,0)+1);
+        }
+        for( int key : m.keySet()){
+            System.out.println(key + "->" + m.get(key));
+        }
