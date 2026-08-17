@@ -1,0 +1,18 @@
+Introduction 
+
+Suppose array [1,2,3,4]
+prefix sum of 1 = 0
+prefix sum of 2 = arr[0] 
+prefix sum of 3 = arr[0] + arr[1]
+prefix sum of 4 = arr[0] +arr[1] +arr[2]
+
+*** prefix[i] = prefix[i-1] + arr[i-1]
+
+such that lets take suffix sum 
+suffix sum of 4 = 0
+suffix sum of 3 = arr[4]
+suffix sum of 2 = arr[4] + arr[3]
+suffix sum of 1 = arr[4] + arr[3] + arr[2]
+
+*** suffix[i] = suffix[i+1] + arr[i+1]
+
